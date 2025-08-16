@@ -14,11 +14,19 @@ pipeline {
             }
         }
 
+        stage('Install Dependencies') {
+            steps {
+                echo 'Installing Python dependencies...'
+                // Upgrade pip
+                bat '"C:\\Users\\LENOVO\\AppData\\Local\\Programs\\Python\\Python313\\python.exe" -m pip install --upgrade pip'
+                // Install requirements if you have a requirements.txt
+                bat '"C:\\Users\\LENOVO\\AppData\\Local\\Programs\\Python\\Python313\\python.exe" -m pip install -r requirements.txt'
+            }
+        }
+
         stage('Run Python Script') {
             steps {
                 echo 'Running hello.py script...'
-
-                // Use correct installed Python path
                 bat '"C:\\Users\\LENOVO\\AppData\\Local\\Programs\\Python\\Python313\\python.exe" hello.py'
             }
         }
