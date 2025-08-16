@@ -1,24 +1,20 @@
-// Triggering build via GitHub webhook
-// Added dummy line to re-trigger webhook
-
 pipeline {
     agent any
-
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
-                echo 'Listing .java files in repo:'
-                bat 'dir /s *.java'
-
-                echo 'Compiling Java files:'
-                bat 'javac HelloWorld.java'
+                checkout scm
             }
         }
-
+        stage('Build') {
+            steps {
+                echo 'Building Python project...'
+            }
+        }
         stage('Run') {
             steps {
-                echo 'Running Java program:'
-                bat 'java HelloWorld'
+                // Run your Python script
+                bat 'python hello.py'
             }
         }
     }
