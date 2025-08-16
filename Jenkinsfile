@@ -18,10 +18,8 @@ pipeline {
             steps {
                 echo 'Running hello.py script...'
 
-                // Use python from PATH
-                // On Windows Jenkins, this works if Python is added to System PATH
-                bat 'python hello.py' // For Windows agents
-                // sh 'python3 hello.py' // Uncomment if using Linux agents
+                // Use correct installed Python path
+                bat '"C:\\Users\\LENOVO\\AppData\\Local\\Programs\\Python\\Python313\\python.exe" hello.py'
             }
         }
     }
