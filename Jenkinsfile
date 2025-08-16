@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    
     stages {
         stage('Checkout') {
             steps {
@@ -17,27 +18,29 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 echo 'Installing Python dependencies...'
-                // Upgrade pip
                 bat '"C:\\Users\\LENOVO\\AppData\\Local\\Programs\\Python\\Python313\\python.exe" -m pip install --upgrade pip'
-                // Install requirements if you have a requirements.txt
                 bat '"C:\\Users\\LENOVO\\AppData\\Local\\Programs\\Python\\Python313\\python.exe" -m pip install -r requirements.txt'
             }
         }
 
-        stage('Run Python Script') {
+        stage('Test') {
             steps {
-                echo 'Running hello.py script...'
-                bat '"C:\\Users\\LENOVO\\AppData\\Local\\Programs\\Python\\Python313\\python.exe" hello.py'
+                echo 'Running Python tests...'
+                bat '"C:\\Users\\LENOVO\\AppData\\Local\\Programs\\Python\\Python313\\python.exe" test_hello.py'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying to AWS...'
+                // Example: AWS S3 deployment
+                bat 'aws s3 cp hello.py s3://your-bucket-name/'
             }
         }
     }
 
     post {
-        success {
-            echo 'Pipeline completed successfully!'
-        }
-        failure {
-            echo 'Pipeline failed. Check console output for details.'
-        }
+        success { echo 'Pipeline completed successfully!' }
+        failure { echo 'Pipeline failed!' }
     }
 }
