@@ -19,7 +19,7 @@ pipeline {
                 echo 'Running hello.py script...'
 
                 // Use the full path to python.exe on your machine
-                bat '"C:\\Users\\LENOVO\\AppData\\Local\\Programs\\Python\\Python311\\python.exe" hello.py'
+                bat '"C:\Users\LENOVO\AppData\Local\Microsoft\WindowsApps\python.exe" hello.py'
             }
         }
     }
